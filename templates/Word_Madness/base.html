@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheeet" href="style.css" />
+    <title>{% block title %}Word Madness!{% endblock%}</title>
+</head>
+
+<body>
+    <div id="Menu">
+        {% block menu %}
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+        {% endblock menu %}
+    </div>
+
+    <div id="contents">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

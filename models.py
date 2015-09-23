@@ -18,4 +18,4 @@ class Word_blank(models.Model):
     )
 
     mad_lib = models.ForeignKey(Mad_Lib)
-    part_of_speech = models.CharField(choices = parts_of_speech_choices)
+    part_of_speech = models.CharField(max_length=20, choices = parts_of_speech_choices)

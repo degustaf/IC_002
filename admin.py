@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Mad_Lib, Word_blank
+
+admin.site.register(Mad_Lib)
+admin.site.register(Word_blank)

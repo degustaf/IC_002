@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheeet" href="style.css" />
-    <title>{% block title %}Word Madness!{% endblock%}</title>
+    {% load staticfiles %}
+    <link rel="stylesheeet" href="{% static "Word_Madness/css/style.css" %}" />
+    <title>{% block title %}Word Madness!{% endblock %}</title>
 </head>
 
 <body>
@@ -14,7 +15,13 @@
         {% endblock menu %}
     </div>
 
-    <div id="contents">
+    <div id="Title">
+        {% block in_doc_title %}
+        <h1> Word Madness! </h1>
+        {% endblock %}
+    </div>
+
+    <div id="Contents">
         {% block content %}{% endblock %}
     </div>
 </body>

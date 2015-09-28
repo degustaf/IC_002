@@ -3,3 +3,9 @@
 /* #Menu */
 
 /* #Contents */
+
+/* textarea */
+textarea{
+    resize: none;
+    overflow: auto;
+}

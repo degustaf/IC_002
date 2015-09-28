@@ -1,0 +1,12 @@
+{% extends "Word_Madness/base.html" %}
+
+{% block title %}Word Madness! - Create Story{% endblock %}
+
+{% block content %}
+    <p>What Story do you want to tell?</p>
+    <p>Click the button when you are ready to remove words to make the game.</p>
+    <form action="{% url 'create' %}" method="post">{% csrf_token %}
+        <textarea name="body" rows="4" cols="50" maxlength="50"></textarea>
+        <input type="submit" value="I'm Done">
+    </form>
+{% endblock content %}

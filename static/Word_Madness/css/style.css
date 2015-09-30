@@ -9,3 +9,10 @@ textarea{
     resize: none;
     overflow: auto;
 }
+
+/* Story that was input */
+
+.body{
+    /* background-color: #eee; */
+    background-color: grey;
+}

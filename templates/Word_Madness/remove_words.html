@@ -1,0 +1,24 @@
+{% extends "Word_Madness/base.html" %}
+
+{% block title %}Word Madness! - Remove Words{% endblock %}
+
+{% block in_doc_title %}
+{{ block.super }}
+    {% for t in title %}
+        <h2> {{ t }} </h2>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <p>click on the words you want to remove, and fill out the form below the stpry.</p>
+    <form action="{% url 'create' %}" method="post">{% csrf_token %}
+        <p class="body"> 
+            {% for b in body %}
+                {{ b }}
+            {% endfor %}
+        </p>
+        <p>Click the button when you are done.</p>
+        <input type="hidden" name="id" value="{{ id }}">
+        <input type="submit" value="I'm Done">
+    </form>
+{% endblock content %}

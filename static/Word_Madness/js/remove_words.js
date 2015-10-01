@@ -1,4 +1,6 @@
-$(".story").click(function(e) {
+$document.ready(function() {console.log("I'm Ready");})
+
+$(".story").on("click", function(e) {
     s = window.getSelection();
     var range = s.getRangeAt(0);
     var node = s.anchorNode;

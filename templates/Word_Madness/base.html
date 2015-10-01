@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load staticfiles %}
-    <link rel="stylesheeet" href="{% static "Word_Madness/css/style.css" %}" />
     <title>{% block title %}Word Madness!{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "Word_Madness/css/style.css" %}" 
+        type="text/css">
+    {% block javascript %}
+    <script src="{% static "Word_Madness/js/jquery-2.1.4.min.js" %}"></script>
+    <script src="{% static "Word_Madness/js/remove_words.js" %}"></script>
+    {% endblock javascript %}
 </head>
 
 <body>

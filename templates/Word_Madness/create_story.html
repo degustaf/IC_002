@@ -7,7 +7,7 @@
     <p>Click the button when you are ready to remove words to make the game.</p>
     <form action="{% url 'create' %}" method="post">{% csrf_token %}
         Title: <input type="text" name="title"><br>
-        <textarea name="body" rows="4" cols="50" maxlength="50"></textarea><br>
+        <textarea name="body" rows="4" cols="50" maxlength="{{ text_length }}"></textarea><br>
         <input type="submit" value="I'm Done">
     </form>
 {% endblock content %}

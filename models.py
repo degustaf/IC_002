@@ -2,9 +2,12 @@ from django.db import models
 
 
 class Mad_Lib(models.Model):
-    title = models.CharField(max_length=20)
-    text =  models.CharField(max_length=1000)
+    @staticmethod
+    def max_text_length():
+        return 1000
 
+    title = models.CharField(max_length=20)
+    text =  models.CharField(max_length=max_text_length.__func__())
 
 class Word_blank(models.Model):
     parts_of_speech_choices = (

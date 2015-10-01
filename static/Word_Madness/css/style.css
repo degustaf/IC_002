@@ -1,8 +1,14 @@
-/* body */
+﻿/* body */
 
 /* #Menu */
 
-/* #Contents */
+@media (min-width: 575px) {
+    #Contents{
+        width: 550px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 
 /* textarea */
 textarea{
@@ -12,7 +18,7 @@ textarea{
 
 /* Story that was input */
 
-.body{
-    /* background-color: #eee; */
-    background-color: grey;
+p.story{
+    background-color: LightGray;
+    line-height: 150%;
 }

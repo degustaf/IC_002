@@ -10,9 +10,9 @@
 {% endblock %}
 
 {% block content %}
-    <p>click on the words you want to remove, and fill out the form below the stpry.</p>
+    <p>Click on the words you want to remove, and fill out the form below the story.</p>
     <form action="{% url 'create' %}" method="post">{% csrf_token %}
-        <p class="body"> 
+        <p class="story"> 
             {% for b in body %}
                 {{ b }}
             {% endfor %}

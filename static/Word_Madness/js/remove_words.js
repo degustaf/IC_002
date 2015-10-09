@@ -1,10 +1,4 @@
 
-$( document ).ready( console.log("Page is ready"));
-
-$( document ).ready(
-    $("#story").on( "click", console.log("I've been clicked")))
-        
-        
 function select_word() {
         console.log("I'm in");
         var s = window.getSelection();
@@ -22,4 +16,13 @@ function select_word() {
         alert(str);
 }
 
-console.log("I'm out");
+$(document).ready(function() {
+    console.log("Page is ready");
+
+    $("#story").on( "click", function(){
+        console.log("I've been clicked");
+        select_word();
+    });
+        
+    console.log("I'm out");
+});

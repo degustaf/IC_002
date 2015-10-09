@@ -12,7 +12,7 @@
 {% block content %}
     <p>Click on the words you want to remove, and fill out the form below the story.</p>
     <form action="{% url 'create' %}" method="post">{% csrf_token %}
-        <p class="story"> 
+        <p id="story"> 
             {% for b in body %}
                 {{ b }}
             {% endfor %}

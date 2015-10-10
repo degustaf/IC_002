@@ -22,3 +22,7 @@ textarea{
     background-color: LightGray;
     line-height: 150%;
 }
+
+.blank_word{
+    background-color: Yellow;
+}

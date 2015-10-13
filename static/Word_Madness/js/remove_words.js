@@ -1,21 +1,21 @@
 var Counter = (function(){
-        var clicked = 0;
-        function reset (){
-           clicked = 0;
-        }
-        function increment() {
-            clicked = clicked + 1;
-        }
-        function getClicked (){
-            return clicked;
-        }
-        return{
-            reset: reset,
-            increment: increment,
-            get: getClicked
-        }
+    var clicked = 0;
+    function reset (){
+        clicked = 0;
+    }
+    function increment() {
+        clicked = clicked + 1;
+    }
+    function getClicked (){
+        return clicked;
+    }
+    return{
+        reset: reset,
+        increment: increment,
+        get: getClicked
+    }
 
-    }());
+}());
 
 function select_word() {
     var s = window.getSelection();
@@ -43,10 +43,9 @@ function a() {
     var range = select_word();
     var str = range.toString().trim();
     var newnode = document.createElement("a");
-    // newnode.className = "blank_word";
     range.surroundContents(newnode);
-    //what does the following log?
     $(newnode).attr("id", Counter.get()).attr("class", "blank_word");
+    $(newnode).text("___(" + Counter.get() + ")___")
     Counter.increment();
 }
 

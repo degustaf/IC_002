@@ -26,3 +26,7 @@ textarea{
 .blank_word{
     background-color: Yellow;
 }
+
+#hidden_data{
+    display: none;
+}

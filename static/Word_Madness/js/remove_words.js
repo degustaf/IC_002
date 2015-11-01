@@ -38,14 +38,29 @@ function select_word() {
     return range;
 }
 
+function create_table_row(counter, word) {
+    var result = "<tr><td>" + counter + "</td><td>" + word + "</td>";
+    var opts = $("#hidden_data").text().split(";");
+    result = result + "<td><select name='Part_of_Speech" + counter + "'>";
+    opts.forEach(function(element, index, array) {
+        result = result + "<option value='" + element + "'>" + element 
+            + "</option>";
+    });
+    result = result + "</select></td>";
+    result = result + "</tr>";
+
+    return result;
+}
 
 function a() {
     var range = select_word();
     var str = range.toString().trim();
     var newnode = document.createElement("a");
+    var cntr = Counter.get()
     range.surroundContents(newnode);
     $(newnode).attr("id", Counter.get()).attr("class", "blank_word");
-    $(newnode).text("___(" + Counter.get() + ")___")
+    $(newnode).text("___(" + cntr + ")___");
+    $("#Words tr:last").after(create_table_row(cntr, str));
     Counter.increment();
 }
 

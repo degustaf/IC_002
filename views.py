@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, render_to_response
 from django.template.context_processors import csrf
 from django.views.decorators.http import require_safe, require_http_methods
-from .models import Mad_Lib
+from .models import Mad_Lib, Word_blank
 
 @require_safe
 def Word_Madness_Index(request):
@@ -24,5 +24,6 @@ def Create_Game(request):
             game.save()
             print(game.id)
             params['id'] = game.id
+            params['parts_of_speech'] = Word_blank.parts_of_speech_choices
             return render(request, 'Word_Madness/remove_words.html', params)
     raise Http404("Page Not Found")

@@ -17,8 +17,18 @@
                 {{ b }}
             {% endfor %}
         </p>
+        <table id="Words">
+            <tr>https://travis-ci.org/
+                <td></td>
+                <td>Original Word</td>
+                <td>Part of Speech</td>
+            </tr>
+        </table>
         <p>Click the button when you are done.</p>
         <input type="hidden" name="id" value="{{ id }}">
         <input type="submit" value="I'm Done">
     </form>
+
+    <div id="hidden_data">{% for s in parts_of_speech %} ;{{ s }} {% endfor %}</div>
+
 {% endblock content %}

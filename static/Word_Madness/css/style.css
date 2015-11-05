@@ -30,3 +30,12 @@ textarea{
 #hidden_data{
     display: none;
 }
+
+table, tr, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td{
+    padding: 5px 10px;
+}

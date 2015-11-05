@@ -47,6 +47,7 @@ function create_table_row(counter, word) {
             + "</option>";
     });
     result = result + "</select></td>";
+    result = result + "<td>delete</td>";
     result = result + "</tr>";
 
     return result;

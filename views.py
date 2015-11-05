@@ -24,6 +24,6 @@ def Create_Game(request):
             game.save()
             print(game.id)
             params['id'] = game.id
-            params['parts_of_speech'] = Word_blank.parts_of_speech_choices
+            params['parts_of_speech'] = [x[0] for x in Word_blank.parts_of_speech_choices]
             return render(request, 'Word_Madness/remove_words.html', params)
     raise Http404("Page Not Found")

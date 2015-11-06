@@ -12,11 +12,9 @@
 {% block content %}
     <p>Click on the words you want to remove, and fill out the form below the story.</p>
     <form action="{% url 'create' %}" method="post">{% csrf_token %}
-        <p id="story"> 
-            {% for b in body %}
+        <p id="story">{% for b in body %}
                 {{ b }}
-            {% endfor %}
-        </p>
+        {% endfor %}</p>
         <table id="Words">
             <tr>
                 <td></td>
@@ -25,8 +23,9 @@
             </tr>
         </table>
         <p>Click the button when you are done.</p>
+        <input type="hidden" name="story_body" value="">
         <input type="hidden" name="id" value="{{ id }}">
-        <input type="submit" value="I'm Done">
+        <input type="submit" value="I'm Done" onclick="sbmt_form">
     </form>
 
     <div id="hidden_data">{% for s in parts_of_speech %} ;{{ s }} {% endfor %}</div>

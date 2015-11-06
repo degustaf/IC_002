@@ -22,10 +22,12 @@ function select_word() {
     var range = s.getRangeAt(0);
     var node = s.anchorNode;
 
-    while (range.toString().indexOf(' ') != 0) {
+    while ( (range.toString().indexOf(' ') !== 0) && (range.startOffset > 0) ) {
         range.setStart(node, (range.startOffset - 1));
     }
-    range.setStart(node, range.startOffset + 1);
+    if(range.toString().indexOf(' ')===0) {
+        range.setStart(node, range.startOffset + 1);
+    }
 
     do {
         range.setEnd(node, range.endOffset + 1);
@@ -39,15 +41,16 @@ function select_word() {
 }
 
 function create_table_row(counter, word) {
-    var result = "<tr><td>" + counter + "</td><td>" + word + "</td>";
+    var result = "<tr><td>" + counter + "</td><td><input type=\"text\" name=\"word_" + counter + "\" value = \"" + word + "\" readonly></td>";
     var opts = $("#hidden_data").text().split(";");
-    result = result + "<td><select name='Part_of_Speech" + counter + "'>";
+    result = result + "<td><select name='Part_of_Speech_" + counter + "'>";
     opts.forEach(function(element, index, array) {
         result = result + "<option value='" + element + "'>" + element 
             + "</option>";
     });
     result = result + "</select></td>";
-    result = result + "<td>delete</td>";
+    result = result + "<td><a href=\"javascript:void(0);\" class=\"deletelink\" onclick=\"remove_row(this);\">";
+    result = result + "Delete</a></td>";
     result = result + "</tr>";
 
     return result;
@@ -63,6 +66,21 @@ function a() {
     $(newnode).text("___(" + cntr + ")___");
     $("#Words tr:last").after(create_table_row(cntr, str));
     Counter.increment();
+}
+
+function remove_row(clicked_element) {
+    var element = clicked_element;
+    while(element.tagName != "TR") {
+        element = element.parentElement;
+    }
+    $( "#" + element.childNodes[0].innerText ).replaceWith(element.childNodes[1].childNodes[0].value);
+    element.parentElement.removeChild(element);
+}
+
+function sbmt_form(event) {
+    event.preventDefault();
+    $( "#story_body" ).val($( "#story" ).innerHTML);
+    $( "form" ).submit();
 }
 
 $(document).ready(function() {

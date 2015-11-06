@@ -65,6 +65,7 @@ function a() {
     $(newnode).attr("id", Counter.get()).attr("class", "blank_word");
     $(newnode).text("___(" + cntr + ")___");
     $("#Words tr:last").after(create_table_row(cntr, str));
+    $( "#story_body" ).val($( "#story" ).html());
     Counter.increment();
 }
 
@@ -75,11 +76,12 @@ function remove_row(clicked_element) {
     }
     $( "#" + element.childNodes[0].innerText ).replaceWith(element.childNodes[1].childNodes[0].value);
     element.parentElement.removeChild(element);
+    $( "#story_body" ).val($( "#story" ).html());
 }
 
 function sbmt_form(event) {
     event.preventDefault();
-    $( "#story_body" ).val($( "#story" ).innerHTML);
+    $( "#story_body" ).val($( "#story" ).html());
     $( "form" ).submit();
 }
 

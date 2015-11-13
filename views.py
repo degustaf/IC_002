@@ -3,6 +3,7 @@ from django.shortcuts import render, render_to_response
 from django.template.context_processors import csrf
 from django.views.decorators.http import require_safe, require_http_methods
 from .models import Mad_Lib, Word_blank
+import re
 
 @require_safe
 def Word_Madness_Index(request):
@@ -16,8 +17,16 @@ def Create_Game(request):
             {'text_length':Mad_Lib.max_text_length()})
     if request.method == 'POST':
         params = dict(request.POST)
-        if 'Words' in params:
-            pass
+        if 'id' in params:
+            # Text was already entered, and we are removing words for the game
+            game = Mad_Lib.objects.get(id=params['id'])
+            text = params['story_body']
+            game.text = re.sub('___\((\d+)\)___', '{\0}', text)
+            game.save()
+            match = re.compile('words_(\d+)')
+            for key, values in params.items():
+                if  match = re.match(key):
+                    word = models.Word_blank()
         else:
             print(params)
             game = Mad_Lib(title=params['title'], text=params['body'])

@@ -3,6 +3,8 @@ from django.shortcuts import render, render_to_response
 from django.template.context_processors import csrf
 from django.views.decorators.http import require_safe, require_http_methods
 from .models import Mad_Lib, Word_blank
+
+from functools import partial
 import re
 
 @require_safe
@@ -21,12 +23,17 @@ def Create_Game(request):
             # Text was already entered, and we are removing words for the game
             game = Mad_Lib.objects.get(id=params['id'])
             text = params['story_body']
-            game.text = re.sub('___\((\d+)\)___', '{\0}', text)
+            word_blanks = []
+            repl = partial(substitution, word_blanks)
+            game.text = re.sub('___\((\d+)\)___', repl, text)
             game.save()
-            match = re.compile('words_(\d+)')
-            for key, values in params.items():
-                if  match = re.match(key):
-                    word = models.Word_blank()
+            for idx, value in enumerate(word_blanks):
+                word = Word_blank(Mad_Lib=params['id'], index_in_text=idx, 
+                    part_of_speech=params['Part_of_Speech_{}'.format(value)],
+                    original_word=params[word_'{}'.format(value)])
+                word.save()
+            #TODO return result page
+            
         else:
             print(params)
             game = Mad_Lib(title=params['title'], text=params['body'])
@@ -36,3 +43,8 @@ def Create_Game(request):
             params['parts_of_speech'] = [x[0] for x in Word_blank.parts_of_speech_choices]
             return render(request, 'Word_Madness/remove_words.html', params)
     raise Http404("Page Not Found")
+
+def substitution(results, match):
+    i = len(results)
+    results.append(match.group(1))
+    return '\{{}\}'.format(i)

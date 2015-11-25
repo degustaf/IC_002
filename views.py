@@ -8,12 +8,18 @@ from functools import partial
 import re
 
 @require_safe
-def Word_Madness_Index(request):
+def word_madness_index(request):
+    """
+    Render the main index page.
+    """
     return render(request, 'Word_Madness/index.html')
 
 
 @require_http_methods(["GET", "HEAD", "POST"])
-def Create_Game(request):
+def create_game(request):
+    """
+    Process and render requests for creating a madlibs game.
+    """
     if request.method == 'GET':
         return render(request, 'Word_Madness/create_story.html', 
             {'text_length':MadLib.max_text_length()})

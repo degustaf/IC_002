@@ -17,6 +17,6 @@ from django.conf.urls import include, url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.Word_Madness_Index, name='home'),
-    url(r'^create/$', views.Create_Game, name='create'),
+    url(r'^$', views.word_madness_index, name='home'),
+    url(r'^create/$', views.create_game, name='create'),
 ]

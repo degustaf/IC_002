@@ -29,7 +29,7 @@ class WordBlank(models.Model):
         ("Verb", "Verb")
     )
 
-    mad_lib = models.ForeignKey(MadLib)
+    MadLib = models.ForeignKey(MadLib)
     part_of_speech = models.CharField(max_length=20, choices = parts_of_speech_choices)
     original_word = models.CharField(max_length=20, default="")
     index_in_text = models.PositiveSmallIntegerField(default=0)

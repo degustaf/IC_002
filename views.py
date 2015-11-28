@@ -29,23 +29,21 @@ def create_game(request):
             # Text was already entered, and we are removing words for the game
             game_id = params['id'][0]
             game = MadLib.objects.get(id=game_id)
-            text = params['story_body']
+            text = params['story_body'][0]
             word_blanks = []
             repl = partial(substitution, word_blanks)
             game.text = re.sub('___\((\d+)\)___', repl, text)
             game.save()
             for idx, value in enumerate(word_blanks):
-                word = WordBlank(MadLib=params['id'], index_in_text=idx, 
+                word = WordBlank(MadLib=game, index_in_text=idx, 
                     part_of_speech=params['Part_of_Speech_{}'.format(value)],
                     original_word=params['word_{}'.format(value)])
                 word.save()
-            #TODO return result page
+            return render(request, 'Word_Madness/story_created.html', params)
             
         else:
-            print(params)
             game = MadLib(title=params['title'], text=params['body'])
             game.save()
-            print(game.id)
             params['id'] = game.id
             params['parts_of_speech'] = [x[0] for x in WordBlank.parts_of_speech_choices]
             return render(request, 'Word_Madness/remove_words.html', params)
@@ -54,4 +52,4 @@ def create_game(request):
 def substitution(results, match):
     i = len(results)
     results.append(match.group(1))
-    return '\{{}\}'.format(i)
+    return '{{{}}}'.format(i)

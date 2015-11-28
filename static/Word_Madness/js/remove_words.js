@@ -31,9 +31,16 @@ function select_word() {
 
     do {
         range.setEnd(node, range.endOffset + 1);
-    } while (range.toString().indexOf(' ') == -1 && 
+    } while (range.toString().match(/\s/) === null && 
             range.toString().trim() != '' && range.endOffset < node.length);
-    if (range.toString().indexOf(' ') != -1) {
+
+    console.log(range.toString().slice(-1).charCodeAt())
+    if (range.toString().match(/\s/) !== null) {
+        range.setEnd(node, range.endOffset - 1);
+    }
+
+    console.log(range.toString().slice(-1).charCodeAt())
+    if (range.toString().slice(-1).match(/[a-z]/i) === null) {
         range.setEnd(node, range.endOffset - 1);
     }
 

@@ -35,7 +35,7 @@ def create_game(request):
             game.text = re.sub('___\((\d+)\)___', repl, text)
             game.save()
             for idx, value in enumerate(word_blanks):
-                word = WordBlank(MadLib=game, index_in_text=idx, 
+                word = WordBlank(mad_lib=game, index_in_text=idx, 
                     part_of_speech=params['Part_of_Speech_{}'.format(value)],
                     original_word=params['word_{}'.format(value)])
                 word.save()
@@ -50,6 +50,11 @@ def create_game(request):
     raise Http404("Page Not Found")
 
 def substitution(results, match):
+    """
+    Generate replacement text for Regex.
+    The front-end does not handle missing indices created by removing word
+    blanks.
+    """
     i = len(results)
     results.append(match.group(1))
     return '{{{}}}'.format(i)

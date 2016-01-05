@@ -12,7 +12,7 @@ def word_madness_index(request):
     """
     Render the main index page.
     """
-    return render(request, 'Word_Madness/index.html')
+    return render(request, 'WordMadness/index.html')
 
 
 @require_http_methods(["GET", "HEAD", "POST"])
@@ -21,7 +21,7 @@ def create_game(request):
     Process and render requests for creating a madlibs game.
     """
     if request.method == 'GET':
-        return render(request, 'Word_Madness/create_story.html', 
+        return render(request, 'WordMadness/create_story.html', 
             {'text_length':MadLib.max_text_length()})
     if request.method == 'POST':
         params = dict(request.POST)
@@ -39,14 +39,14 @@ def create_game(request):
                     part_of_speech=params['Part_of_Speech_{}'.format(value)],
                     original_word=params['word_{}'.format(value)])
                 word.save()
-            return render(request, 'Word_Madness/story_created.html', params)
+            return render(request, 'WordMadness/story_created.html', params)
             
         else:
             game = MadLib(title=params['title'], text=params['body'])
             game.save()
             params['id'] = game.id
             params['parts_of_speech'] = [x[0] for x in WordBlank.parts_of_speech_choices]
-            return render(request, 'Word_Madness/remove_words.html', params)
+            return render(request, 'WordMadness/remove_words.html', params)
     raise Http404("Page Not Found")
 
 def substitution(results, match):
@@ -58,3 +58,11 @@ def substitution(results, match):
     i = len(results)
     results.append(match.group(1))
     return '{{{}}}'.format(i)
+
+@require_safe
+def play_index():
+    """
+    Render the index page for playing a game.
+    """
+#     params = dict(request.
+#     return render(request, 'WordMadness/play_index.html')

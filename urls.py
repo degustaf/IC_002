@@ -19,4 +19,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.word_madness_index, name='home'),
     url(r'^create/$', views.create_game, name='create'),
+    url(r'^play/$', views.play_index, name='play-index')
 ]

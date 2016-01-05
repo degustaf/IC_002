@@ -1,3 +1,6 @@
+"""
+Models for controlling MadLib game in WordMadness.
+"""
 from django.db import models
 
 
@@ -13,7 +16,7 @@ class MadLib(models.Model):
         return 1000
 
     title = models.CharField(max_length=20)
-    text =  models.CharField(max_length=max_text_length.__func__())
+    text = models.CharField(max_length=max_text_length.__func__())
 
 class WordBlank(models.Model):
     """
@@ -32,6 +35,6 @@ class WordBlank(models.Model):
     )
 
     mad_lib = models.ForeignKey(MadLib)
-    part_of_speech = models.CharField(max_length=20, choices = parts_of_speech_choices)
+    part_of_speech = models.CharField(max_length=20, choices=parts_of_speech_choices)
     original_word = models.CharField(max_length=20, default="")
     index_in_text = models.PositiveSmallIntegerField(default=0)

@@ -1,11 +1,14 @@
-from django.http import Http404
-from django.shortcuts import render, render_to_response
-from django.template.context_processors import csrf
-from django.views.decorators.http import require_safe, require_http_methods
-from .models import MadLib, WordBlank
-
+"""
+Functions to control views of Pages
+"""
 from functools import partial
 import re
+
+from django.http import Http404
+from django.shortcuts import render #, render_to_response
+#from django.template.context_processors import csrf
+from django.views.decorators.http import require_safe, require_http_methods
+from .models import MadLib, WordBlank
 
 @require_safe
 def word_madness_index(request):
@@ -21,8 +24,8 @@ def create_game(request):
     Process and render requests for creating a madlibs game.
     """
     if request.method == 'GET':
-        return render(request, 'WordMadness/create_story.html', 
-            {'text_length':MadLib.max_text_length()})
+        return render(request, 'WordMadness/create_story.html',
+                      {'text_length':MadLib.max_text_length()})
     if request.method == 'POST':
         params = dict(request.POST)
         if 'id' in params:
@@ -35,12 +38,13 @@ def create_game(request):
             game.text = re.sub('___\((\d+)\)___', repl, text)
             game.save()
             for idx, value in enumerate(word_blanks):
-                word = WordBlank(mad_lib=game, index_in_text=idx, 
+                word = WordBlank(
+                    mad_lib=game, index_in_text=idx,
                     part_of_speech=params['Part_of_Speech_{}'.format(value)],
                     original_word=params['word_{}'.format(value)])
                 word.save()
             return render(request, 'WordMadness/story_created.html', params)
-            
+
         else:
             game = MadLib(title=params['title'], text=params['body'])
             game.save()

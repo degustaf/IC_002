@@ -5,6 +5,7 @@ from django.core.urlresolvers import resolve
 from django.test import TestCase
 from WordMadness import views
 
+
 class HomePageTest(TestCase):
     """
     class of tests related to the home page.
@@ -17,6 +18,7 @@ class HomePageTest(TestCase):
         found = resolve('/')
         self.assertEqual(found.func, views.word_madness_index)
 
+
 class CreateGameTest(TestCase):
     """
     Class of tests related to the page for testing games.
@@ -28,6 +30,7 @@ class CreateGameTest(TestCase):
         """
         found = resolve('/create/')
         self.assertEqual(found.func, views.create_game)
+
 
 class PlayIndexTest(TestCase):
     """

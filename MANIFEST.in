@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include WordMadness/static *
+recursive-include WordMadness/templates *

@@ -10,7 +10,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='WordMadness',
     version='0.1',
-    packages=['WordMadness'],
+    packages=['WordMadness', 'tests'],
     include_package_data=True,
     license='GNU General Public License v3.0',
     description='A simple Django app to play madlibs',

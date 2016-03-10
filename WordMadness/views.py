@@ -5,10 +5,11 @@ from functools import partial
 import re
 
 from django.http import Http404
-from django.shortcuts import render #, render_to_response
-#from django.template.context_processors import csrf
+from django.shortcuts import render  # , render_to_response
+# from django.template.context_processors import csrf
 from django.views.decorators.http import require_safe, require_http_methods
 from .models import MadLib, WordBlank
+
 
 @require_safe
 def word_madness_index(request):
@@ -25,7 +26,7 @@ def create_game(request):
     """
     if request.method == 'GET':
         return render(request, 'WordMadness/create_story.html',
-                      {'text_length':MadLib.max_text_length()})
+                      {'text_length': MadLib.max_text_length()})
     if request.method == 'POST':
         params = dict(request.POST)
         if 'id' in params:
@@ -35,7 +36,7 @@ def create_game(request):
             text = params['story_body'][0]
             word_blanks = []
             repl = partial(substitution, word_blanks)
-            game.text = re.sub('___\((\d+)\)___', repl, text)
+            game.text = re.sub(r'___\((\d+)\)___', repl, text)
             game.save()
             for idx, value in enumerate(word_blanks):
                 word = WordBlank(
@@ -49,9 +50,11 @@ def create_game(request):
             game = MadLib(title=params['title'], text=params['body'])
             game.save()
             params['id'] = game.id
-            params['parts_of_speech'] = [x[0] for x in WordBlank.parts_of_speech_choices]
+            params['parts_of_speech'] = [x[0] for x in
+                                         WordBlank.parts_of_speech_choices]
             return render(request, 'WordMadness/remove_words.html', params)
     raise Http404("Page Not Found")
+
 
 def substitution(results, match):
     """
@@ -62,6 +65,7 @@ def substitution(results, match):
     i = len(results)
     results.append(match.group(1))
     return '{{{}}}'.format(i)
+
 
 @require_safe
 def play_index():

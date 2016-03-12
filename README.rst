@@ -1,4 +1,9 @@
-# IC_002
+IC_002
+========
+
+.. image:: https://travis-ci.org/degustaf/IC_002.svg?branch=master
+    :target: https://travis-ci.org/degustaf/IC_002
+
 Iron Coder Project #2:  Word Madness Project
 
 Summary:  To complete this challenge, prompt the user to input certain types of words and then plug those words into a short story.  

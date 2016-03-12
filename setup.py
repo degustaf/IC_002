@@ -12,7 +12,7 @@ setup(
     version='0.1',
     packages=['WordMadness', 'tests'],
     include_package_data=True,
-    license='GNU General Public License v3.0',
+    license='GNU General Public License v2.0',
     description='A simple Django app to play madlibs',
     long_description=README,
     url='https://github.com/degustaf/IC_002',
@@ -22,10 +22,9 @@ setup(
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GPLv3',  # example license
+        'License :: OSI Approved :: GPLv2',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        # Replace these appropriately if you are stuck on Python 2.
         'Programming Language :: Python :: 3.4',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',

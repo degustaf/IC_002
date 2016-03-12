@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from . import views
 
+# pylint: disable=invalid-name
 urlpatterns = [
     url(r'^$', views.word_madness_index, name='home'),
     url(r'^create/$', views.create_game, name='create'),

@@ -18,6 +18,7 @@ class MadLib(models.Model):
     title = models.CharField(max_length=20)
     text = models.CharField(max_length=max_text_length.__func__())
 
+
 class WordBlank(models.Model):
     """
     Details of a removed word from a madlibs game.
@@ -35,6 +36,7 @@ class WordBlank(models.Model):
     )
 
     mad_lib = models.ForeignKey(MadLib)
-    part_of_speech = models.CharField(max_length=20, choices=parts_of_speech_choices)
+    part_of_speech = models.CharField(max_length=20,
+                                      choices=parts_of_speech_choices)
     original_word = models.CharField(max_length=20, default="")
     index_in_text = models.PositiveSmallIntegerField(default=0)

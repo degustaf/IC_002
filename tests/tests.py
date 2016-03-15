@@ -1,7 +1,7 @@
 """
 Classes to test code.
 """
-from django.core.urlresolvers import resolve
+from django.core.urlresolvers import resolve, reverse
 from django.test import TestCase
 from WordMadness import views
 
@@ -15,8 +15,17 @@ class HomePageTest(TestCase):
         """
         Test that home page resolves.
         """
-        found = resolve('/')
+        found = resolve(reverse('home'))
         self.assertEqual(found.func, views.word_madness_index)
+
+    def test_root_url_responds(self):
+        """
+        Test that home page returns 200.
+        """
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Word Madness!")
+        self.assertContains(response, "Create a new Game")
 
 
 class CreateGameTest(TestCase):
@@ -28,9 +37,17 @@ class CreateGameTest(TestCase):
         """
         Test that game creation page resolves.
         """
-        found = resolve('/create/')
+        found = resolve(reverse('create'))
         self.assertEqual(found.func, views.create_game)
 
+    def test_create_game_url_get_returns(self):
+        """
+        Test that game creation get request responds.
+        """
+        response = self.client.get(reverse('create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "What Story do you want to tell?")
+        self.assertContains(response, "I'm Done")
 
 class PlayIndexTest(TestCase):
     """

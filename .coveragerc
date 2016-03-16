@@ -6,5 +6,5 @@ omit =
 
 [report]
 fail_under =
-    50
+    60
 show_missing = True
